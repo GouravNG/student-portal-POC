@@ -8,3 +8,11 @@ export const useAuth = () =>
       toggleIsAuth,
     })),
   )
+
+export const useViewPassword = () =>
+  usePersisStore(
+    useShallow(({ isViewPassword, toggleViewPassword }) => ({
+      isViewPassword,
+      toggleViewPassword,
+    })),
+  )
