@@ -1,20 +1,18 @@
 import { useViewPassword } from '../store/hooks/useAuth'
+import { useLoginForm, type LoginRequest } from '../forms/login.form'
+import { useLogin } from '../api'
 import { Eye, EyeClosed } from 'lucide-react'
 
-import {
-  Button,
-  Card,
-  Container,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
-  OutlinedInput,
-  Stack,
-  TextField,
-} from '@mui/material'
 import FormControl from '@mui/material/FormControl'
-import { useLoginForm, type LoginRequest } from '../forms/login.form'
-import { useLogin } from '../api/hooks/useLogin'
+import Stack from '@mui/material/Stack'
+import TextField from '@mui/material/TextField'
+import FormHelperText from '@mui/material/FormHelperText'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import InputAdornment from '@mui/material/InputAdornment'
+import IconButton from '@mui/material/IconButton'
+import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
+import Card from '@mui/material/Card'
 
 const LoginForm = () => {
   const { isViewPassword, toggleViewPassword } = useViewPassword()
@@ -32,7 +30,6 @@ const LoginForm = () => {
     <Stack spacing={2} component={'form'} onSubmit={handleSubmit(handleSignin)}>
       <FormControl error={!!errors.studentEmail}>
         <TextField
-          // label='Email'
           placeholder='ex:yourname@vcet.com'
           {...register('studentEmail')}
         />
