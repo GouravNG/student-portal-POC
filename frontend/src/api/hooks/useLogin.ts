@@ -3,18 +3,34 @@ import { fn_login } from '../function/auth.function'
 import type { LoginRequest } from '../function/types'
 import { useAuth } from '../../store/hooks/useAuth'
 import { useLocation, useNavigate } from 'react-router'
+import { useSnackBar } from '../../store/hooks'
+import { AxiosError } from 'axios'
 
 export const useLogin = () => {
   const { toggleIsAuth } = useAuth()
   const { state } = useLocation()
   const navigate = useNavigate()
+  const { setMessage, setSeverity } = useSnackBar()
+
   return useMutation({
     mutationKey: ['login'],
     mutationFn: (request: LoginRequest) => fn_login(request),
-    onSuccess: () => {
+
+    onSuccess: ({ data }) => {
       toggleIsAuth()
+      setSeverity('success')
+      setMessage(data?.message || 'Loggedin successfully')
       navigate(state ?? '/test')
     },
-    onError: () => {},
+
+    onError: (e) => {
+      setSeverity('error')
+      if (e instanceof AxiosError) {
+        console.log(e)
+        setMessage(
+          e.response?.data?.message ?? 'Plese enter correct credentials',
+        )
+      } else setMessage('Unknow error occurred')
+    },
   })
 }
