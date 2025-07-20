@@ -28,7 +28,9 @@ export const useLogin = () => {
       if (e instanceof AxiosError) {
         console.log(e)
         setMessage(
-          e.response?.data?.message ?? 'Plese enter correct credentials',
+          e.response?.data?.message ??
+            e.message ??
+            'Plese enter correct credentials',
         )
       } else setMessage('Unknow error occurred')
     },

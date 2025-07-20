@@ -39,3 +39,5 @@ export const SideBarElements = [
     icon: () => <BriefcaseBusiness color='black' />,
   },
 ]
+
+export const UniName = 'VCET'
