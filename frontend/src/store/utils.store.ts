@@ -8,6 +8,9 @@ type Utils = {
   severity: SnackBarSeverity
   setMessage: (message: string) => void
   setSeverity: (severity: SnackBarSeverity) => void
+
+  isSideBar: boolean
+  toggleSideBar: () => void
 }
 
 const useUtilsStore = create<Utils>((set) => ({
@@ -15,6 +18,8 @@ const useUtilsStore = create<Utils>((set) => ({
   severity: undefined,
   setMessage: (message) => set({ message }),
   setSeverity: (severity) => set({ severity }),
+  isSideBar: true,
+  toggleSideBar: () => set((s) => ({ isSideBar: !s.isSideBar })),
 }))
 
 export default useUtilsStore

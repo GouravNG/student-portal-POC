@@ -9,19 +9,19 @@ import {
   Stack,
 } from '@mui/material'
 import { Sidebar } from 'lucide-react'
-import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router'
 import { SideBarElements } from '../../properties'
+import useSideBar from '../../store/hooks/useSideBar'
 
 const CommonLayout = () => {
-  const [isSideBar, toggleSideBar] = useState(true)
+  const { isSideBar, toggleSideBar } = useSideBar()
   const DRAWER_WIDTH = 240
 
   return (
     <>
       <Drawer
         open={isSideBar}
-        onClose={() => toggleSideBar(!isSideBar)}
+        onClose={() => toggleSideBar()}
         variant='persistent'
         sx={{
           '& .MuiDrawer-paper': {
@@ -82,8 +82,10 @@ const CommonLayout = () => {
         }}
       >
         <IconButton
-          onClick={() => toggleSideBar(!isSideBar)}
+          onClick={() => toggleSideBar()}
           sx={{
+            p: 0,
+            m: 0,
             ':hover': {
               background: 'white',
             },
@@ -91,7 +93,9 @@ const CommonLayout = () => {
         >
           <Sidebar />
         </IconButton>
-        <Outlet />
+        <Box sx={{ pl: 2 }}>
+          <Outlet />
+        </Box>
       </Box>
     </>
   )
