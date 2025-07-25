@@ -7,6 +7,7 @@ import { LogOut, MoonIcon, Sidebar } from 'lucide-react'
 import useSideBar from '../store/hooks/useSideBar'
 import { UniName } from '../properties'
 import { useAuth } from '../store/hooks'
+import { useLocation } from 'react-router'
 
 const UtilityButtons = () => {
   const { toggleIsAuth } = useAuth()
@@ -28,6 +29,7 @@ const UtilityButtons = () => {
 }
 
 const Logo = () => {
+  const { pathname } = useLocation()
   return (
     <>
       <Typography
@@ -36,7 +38,11 @@ const Logo = () => {
         variant='h4'
         sx={{ ml: 2, fontWeight: 'bold' }}
       >
-        {UniName}
+        {UniName}{' '}
+        <Typography variant='overline'>
+          {' '}
+          - {pathname.substring(1).replace('-', ' ').toLocaleUpperCase()}
+        </Typography>
       </Typography>
     </>
   )
